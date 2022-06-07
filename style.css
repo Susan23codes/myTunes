@@ -1,0 +1,26 @@
+.search_results {
+    border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#input {
+    height: 25px;
+}
+
+#audio {
+    width: 1000px;
+}
+
+.song_card {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 2px solid black;
+    width: 200px;
+    flex-grow: 1;
+}
+
+.album_cover {
+    width: 75px;
+}
