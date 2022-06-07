@@ -1,9 +1,13 @@
 let searchResults = document.querySelector(".search_results")
-searchResults.addEventListener("click", playSnippet)
+// searchResults.addEventListener("click", playSnippet)
+// let audio = document.getElementById("audio")
 
-function playSnippet(event) {
-    console.log(event.target)
-}
+// function playSnippet(event) {
+//     console.log(event.target)
+//     if (event.target.classList.contains("song-title")) {
+//     console.log(`target: ${target}`)
+//     audio.src = event.target.nextElementSibling.innerText
+// }
 
 let button = document.querySelector(".button");
 button.addEventListener("click", function(e) {
@@ -49,14 +53,21 @@ fetch (itunesUrl, {
         
         let icon = document.createElement("i")
         icon.classList.add("fa-solid")
-        icon.classList.add("fa-play")
+        icon.classList.add("fa-circle-play")
+        icon.classList.add("fa-2x")
         iconLinkP.appendChild(icon)
 
         let songTitle = document.createElement("p")
+        songTitle.classList.add("song-title")
         songTitle.innerText = ("Song Title: ") + `${trackInfo.trackName}`
         iconLinkP.appendChild(songTitle)
         songCard.appendChild(iconLinkP)
         
+        // let audioSource = document.createElement("div")
+        // audioSource.classList.add("audio-source")
+        // audioSource.innerText = trackInfo.previewUrl
+        // songCard.appendChild(audioSource)
+
         let albumTitle = document.createElement("p")
         albumTitle.innerText = "Album Title: " + `${trackInfo.collectionName}`
         songCard.appendChild(albumTitle)
@@ -65,9 +76,11 @@ fetch (itunesUrl, {
         artistName.innerText = ("Artist Name: ") + `${trackInfo.artistName}`
         songCard.appendChild(artistName)
 
+
+
         searchResults.appendChild(songCard)
 
      }
     }
 })
-     
+// }

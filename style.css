@@ -24,3 +24,7 @@
 .album_cover {
     width: 75px;
 }
+
+.audio-source {
+    display: none;
+}
