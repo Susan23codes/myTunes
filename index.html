@@ -5,24 +5,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Permanent+Marker&display=swap" <link
+    rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fresca&family=Orbitron&family=Permanent+Marker&family=Roboto:ital,wght@1,100&display=swap"
+    rel="stylesheet">
   <script src="main.js" defer></script>
   <title>Music Search</title>
 </head>
 
 <body>
-  <h1>myTunes</h1>
-  <form class="search">
-    <input type="text" placeholder="Search by Artist" id="search-input" size=50 required></input>
-    <button class = "button" type="submit">Search</button>
-  </form>
-    <br>
-    <br>
+  <div class="top-section">
+    <h1 class="title">TryTunes 🎵</h1>
+    <form class="search">
+      <input onclick="this.select()" type="text" placeholder="Search by Artist" id="search-input" size=50 required></input>
+      <button class="button" type="submit">Search</button>
+    </form>
     <audio id="audio" controls></audio>
-    <p>Now Playing: </p>
-    <hr>
-  <p>Search Results:</p>
-  <div class="search_results">
+    <p class="now-playing"></p>
+  </div>
+  <hr>
+  <div class = "scroller">
+    <h2 class="search-results-heading">Search Results:</h2>
+    <div class="search_results">
+    </div>
   </div>
   <br>
 

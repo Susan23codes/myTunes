@@ -1,30 +1,123 @@
 .search_results {
-    border: 2px solid black;
     display: flex;
     flex-wrap: wrap;
+    width: 75vw;
+    margin: 0 auto;
 }
 
-#input {
-    height: 25px;
+
+.top-section {
+    background-color: rgb(172, 147, 174);
+    padding-bottom: 10px;
+    height: 25vh;
 }
+
+.scroller {
+    overflow: scroll;
+    height: 75vh;
+}
+.search-results-heading {
+    font-size: 40px;
+    font-family: Permanent marker, cursive;
+    color: rgb(126, 94, 157);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.title {
+    text-align: center;
+    font-family: Permanent marker, cursive;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+#search-input {
+    height: 25px;
+    padding-bottom: 0;
+}
+
+.search {
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
 
 #audio {
-    width: 1000px;
+    width: 500px;
+    display: block;
+    margin: 0 auto;
+    padding-top: 10px;;
 }
+
+.now-playing {
+    text-align: center;
+    font-family: Fresca, sans-serif;
+    font-size: 15px;
+}
+
 
 .song_card {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    border: 2px solid black;
+    border: 4px solid rebeccapurple;
+    background-color: darkgray;
     width: 200px;
     flex-grow: 1;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 5px 5px;
+}
+
+.song-title  {
+    padding: 10px;
+    font-family: Fresca, sans-serif;
+    border: 2px solid;
+    border-radius: 30%;
+}
+
+.album-title {
+    padding: 0;
+    margin: 0;
+    font-family: Fresca, sans-serif;
+}
+
+.artist-name {
+    padding: 10px;
+    margin: 5px;
+    font-family: Fresca, sans-serif;
+}
+
+.play-button {
+    width: 200px;
+    margin-top: 5px;
+    transition: all .2x ease-in-out;
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    background-color: aqua;
 }
 
 .album_cover {
-    width: 75px;
+    width: 100px;
 }
 
 .audio-source {
     display: none;
+}
+
+.no-results {
+    font-size: 30px;
+    font-family: Fresca;
+    text-align: center;
+    padding: 50px;
+    margin: 0 auto;
+}
+
+.caulkin-image {
+    height: 400px;
 }

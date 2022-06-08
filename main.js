@@ -1,86 +1,122 @@
 let searchResults = document.querySelector(".search_results")
-// searchResults.addEventListener("click", playSnippet)
-// let audio = document.getElementById("audio")
-
-// function playSnippet(event) {
-//     console.log(event.target)
-//     if (event.target.classList.contains("song-title")) {
-//     console.log(`target: ${target}`)
-//     audio.src = event.target.nextElementSibling.innerText
-// }
-
+searchResults.addEventListener("click", playSnippet)
 let button = document.querySelector(".button");
-button.addEventListener("click", function(e) {
+button.addEventListener("click", doSearch)
+// document.getElementById("search-input").setCustomValidity("Lorum Ipsum")
+
+let audio = document.getElementById("audio")
+let nowPlaying = document.querySelector(".now-playing")
+
+
+function playSnippet(event) {
+    if (event.target.classList.contains("play-button")) {
+        console.log(`target: ${event.target}`)
+        audio.src = event.target.nextElementSibling.innerText
+        audio.play()
+        nowPlaying.innerText = "Now Playing: " + event.target.nextSibling.nextElementSibling.innerText
+    }
+}
+
+function doSearch(e) {
+
+    console.log("doSearch")
     let searchInputElement = document.getElementById("search-input")
     let searchTerm = searchInputElement.value.toLowerCase()
     let searchResult = searchTerm.split(" ").join("+")
-    e.preventDefault()
     console.log(searchResult)
 
-let itunesUrl = "https://itunes.apple.com/search?media=music&attribute=artistTerm&term=" + searchResult
-console.log(itunesUrl)
+    if (searchTerm) {
+        e.preventDefault()
+    }
 
-fetch (itunesUrl, {
-    method: "GET",
-    headers: {'Content-Type': 'application/json'},
-})
-    .then(function (response) {
-        return response.json()
+    let itunesUrl = "https://itunes.apple.com/search?media=music&attribute=artistTerm&limit=100&term=" + searchResult
+    console.log(itunesUrl)
+
+    fetch(itunesUrl, {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' },
     })
-    .then(function (data) {
-        delete(searchResults)
-        console.log(data)
-        buildItunes(data)
-    })
+        .then(function (response) {
+            if (response.ok) 
+            return response.json();
+            else throw new Error("Status code error :" + response.status)
+        })
+        .then(function (data) {
+            console.log(data)
+            if (data.resultCount === 0) {
+                noSearchResults()
+            } else {
+                buildItunes(data)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
 
-     function buildItunes(data) {
 
-        // clears previous results
-        searchResults.innerHTML = "";
+function noSearchResults() {
+    searchResults.innerHTML = ""
+    let noResults = document.createElement("h3")
+    let img = document.createElement("img")
+    img.classList.add("caulkin-image")
+    img.src = "https://globalnews.ca/wp-content/uploads/2014/12/ha_culkin.jpg?w=2048"
+    noResults.classList.add("no-results")
+    noResults.innerText = "Sorry, your search did not return any results!" 
+    noResults.appendChild(img)
+    searchResults.appendChild(noResults)
+}
 
-        for (let trackInfo of data.results) {
 
+function buildItunes(data) {
+    // clears previous results
+    searchResults.innerHTML = "";
+    searchResults.scrollTop = 0;
+
+    
+    for (let trackInfo of data.results) {
+        
         let songCard = document.createElement("div")
         songCard.classList.add("song_card")
 
+        // Album cover
         let albumCover = document.createElement("img")
         albumCover.classList.add("album_cover")
         albumCover.setAttribute("src", `${trackInfo.artworkUrl100}`)
         songCard.appendChild(albumCover)
-        
-        
-        let iconLinkP = document.createElement("p")
-        
-        let icon = document.createElement("i")
-        icon.classList.add("fa-solid")
-        icon.classList.add("fa-circle-play")
-        icon.classList.add("fa-2x")
-        iconLinkP.appendChild(icon)
 
+        // Plau button
+        let playButton = document.createElement("button")
+        playButton.classList.add("play-button")
+        playButton.innerText = "Listen to a Preview"
+        songCard.appendChild(playButton)
+
+        // Audio
+        let audioSource = document.createElement("div")
+        audioSource.classList.add("audio-source")
+        audioSource.innerText = trackInfo.previewUrl
+        songCard.appendChild(audioSource)
+
+        // Song title
         let songTitle = document.createElement("p")
         songTitle.classList.add("song-title")
-        songTitle.innerText = ("Song Title: ") + `${trackInfo.trackName}`
-        iconLinkP.appendChild(songTitle)
-        songCard.appendChild(iconLinkP)
-        
-        // let audioSource = document.createElement("div")
-        // audioSource.classList.add("audio-source")
-        // audioSource.innerText = trackInfo.previewUrl
-        // songCard.appendChild(audioSource)
+        songTitle.innerText =  `${trackInfo.trackName}`
+        // iconLinkP.appendChild(songTitle)
+        songCard.appendChild(songTitle)
 
+
+        // Album title
         let albumTitle = document.createElement("p")
+        albumTitle.classList.add("album-title")
         albumTitle.innerText = "Album Title: " + `${trackInfo.collectionName}`
         songCard.appendChild(albumTitle)
-        
+
+        // Band/Artist
         let artistName = document.createElement("p")
+        artistName.classList.add("artist-name")
         artistName.innerText = ("Artist Name: ") + `${trackInfo.artistName}`
         songCard.appendChild(artistName)
 
-
-
         searchResults.appendChild(songCard)
-
-     }
     }
-})
-// }
+}
