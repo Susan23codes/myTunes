@@ -2,7 +2,6 @@ let searchResults = document.querySelector(".search_results")
 searchResults.addEventListener("click", playSnippet)
 let button = document.querySelector(".button");
 button.addEventListener("click", doSearch)
-// document.getElementById("search-input").setCustomValidity("Lorum Ipsum")
 
 let audio = document.getElementById("audio")
 let nowPlaying = document.querySelector(".now-playing")
@@ -37,8 +36,8 @@ function doSearch(e) {
         headers: { 'Content-Type': 'application/json' },
     })
         .then(function (response) {
-            if (response.ok) 
-            return response.json();
+            if (response.ok)
+                return response.json();
             else throw new Error("Status code error :" + response.status)
         })
         .then(function (data) {
@@ -62,7 +61,7 @@ function noSearchResults() {
     img.classList.add("caulkin-image")
     img.src = "https://globalnews.ca/wp-content/uploads/2014/12/ha_culkin.jpg?w=2048"
     noResults.classList.add("no-results")
-    noResults.innerText = "Sorry, your search did not return any results!" 
+    noResults.innerText = "Sorry, your search did not return any results!"
     noResults.appendChild(img)
     searchResults.appendChild(noResults)
 }
@@ -71,11 +70,12 @@ function noSearchResults() {
 function buildItunes(data) {
     // clears previous results
     searchResults.innerHTML = "";
+    // goes back to the top of the search results if new search performed
     searchResults.scrollTop = 0;
 
-    
+
     for (let trackInfo of data.results) {
-        
+
         let songCard = document.createElement("div")
         songCard.classList.add("song_card")
 
@@ -100,8 +100,7 @@ function buildItunes(data) {
         // Song title
         let songTitle = document.createElement("p")
         songTitle.classList.add("song-title")
-        songTitle.innerText =  `${trackInfo.trackName}`
-        // iconLinkP.appendChild(songTitle)
+        songTitle.innerText = `${trackInfo.trackName}`
         songCard.appendChild(songTitle)
 
 
