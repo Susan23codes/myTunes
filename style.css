@@ -11,6 +11,11 @@
     height: 25vh;
 }
 
+.record {
+    width: 100%;
+    margin: 0 auto;
+}
+
 .scroller {
     overflow: scroll;
     height: 75vh;

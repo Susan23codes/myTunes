@@ -59,7 +59,7 @@ function noSearchResults() {
     let noResults = document.createElement("h3")
     let img = document.createElement("img")
     img.classList.add("caulkin-image")
-    img.src = "https://globalnews.ca/wp-content/uploads/2014/12/ha_culkin.jpg?w=2048"
+    img.src = "images/ha_culkin.webp"
     noResults.classList.add("no-results")
     noResults.innerText = "Sorry, your search did not return any results!"
     noResults.appendChild(img)
